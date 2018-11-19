@@ -73,6 +73,7 @@ public class SerialWriter {
 		}
 		messageOutput.add(FOOTERA | ((crc >> 4) & 0x0F));
 		messageOutput.add(FOOTERB | (crc & 0x0F));
+		log.debug("Message sended {}", messageOutput);
 		return messageOutput;
 	}
 
