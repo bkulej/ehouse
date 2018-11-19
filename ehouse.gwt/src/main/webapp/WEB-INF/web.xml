@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+              http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	version="2.5" xmlns="http://java.sun.com/xml/ns/javaee">
+
+	<servlet>
+		<servlet-name>AtmosphereServlet</servlet-name>
+		<servlet-class>org.atmosphere.cpr.AtmosphereServlet</servlet-class>
+		<init-param>
+			<param-name>org.atmosphere.disableOnStateEvent</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		<init-param>
+            <param-name>org.atmosphere.useWebSocket</param-name>
+            <param-value>true</param-value>
+        </init-param>
+		<load-on-startup>1</load-on-startup>
+		<async-supported>true</async-supported>
+		<!-- <init-param> 
+			<param-name>org.atmosphere.useWebSocket</param-name> 
+			<param-value>true</param-value> 
+		</init-param> -->
+		<!--<init-param> 
+			<param-name>org.atmosphere.useNative</param-name> 
+			<param-value>true</param-value> 
+		</init-param> 
+		<init-param> 
+			<param-name>org.atmosphere.useBlocking</param-name> 
+			<param-value>true</param-value> 
+		</init-param> -->
+		<!--Uncomment if you want to use Servlet 3.0 Async Support
+		<async-supported>true</async-supported>  -->
+	</servlet>
+	<servlet>
+		<servlet-name>UploaderServlet</servlet-name>
+		<servlet-class>pl.eHouse.web.common.uploader.UploaderServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+		<async-supported>true</async-supported>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>AtmosphereServlet</servlet-name>
+		<url-pattern>/common/comet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>UploaderServlet</servlet-name>
+		<url-pattern>/common/upload</url-pattern>
+	</servlet-mapping>
+
+	<welcome-file-list>
+		<welcome-file>Main.html</welcome-file>
+	</welcome-file-list>
+
+</web-app>

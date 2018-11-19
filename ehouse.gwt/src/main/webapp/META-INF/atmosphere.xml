@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="windows-1252"?>
+
+<atmosphere-handlers>
+    <atmosphere-handler support-session="false"
+    					context-root="/common/comet"
+                        class-name="pl.eHouse.web.common.server.AtmosphereHandler">
+        <property name="heartbeat" value="20000"/>
+    </atmosphere-handler>    
+</atmosphere-handlers>

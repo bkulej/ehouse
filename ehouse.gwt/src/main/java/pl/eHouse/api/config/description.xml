@@ -1,0 +1,153 @@
+<config>           
+
+<!-- DEVICE TYPES 
+	SYSTEM 		00
+	OUTPUT1		01	
+	OUTPUT2		02
+	THERM		03
+	VOLT		04
+	INPUT		05
+	PWM			06
+	FREQ		07
+	
+	HEAT_MAIN	30
+	HEAT_3WAY	31
+	HEAT_4WAY	32
+	IRRIGATION	33
+	RECUPERATOR 34
+	GATE1		35
+	GATE2		36
+		
+	NULL		FF
+ -->
+	
+	<hardware softwareType ='0001' hardwareType='0168'>
+    	<device number='00' type='00'/>
+    	<device number='01' type='34'/>
+        <device number='02' type='03'/>                        
+        <device number='03'	type='04'/>                             
+        <device number='04' type='01'/>   
+        <device number='05' type='01'/>
+        <device number='06' type='01'/>
+        <device number='07' type='01'/>
+        <device number='08' type='01'/>    
+        <device number='09' type='01'/>
+        <device number='0A' type='05'/>     
+	</hardware>  
+	
+	<hardware softwareType ='0002' hardwareType='0328' >
+    	<device number='00' type='00'/>
+        <device number='01' type='05'/>                        
+        <device number='02'	type='05'/>                             
+        <device number='03' type='05'/>            
+        <device number='04' type='05'/>
+        <device number='05' type='05'/>
+        <device number='06' type='05'/>
+        <device number='07' type='01'/>
+        <device number='08' type='01'/>
+        <device number='09' type='01'/>
+        <device number='0A' type='03'/>
+        <device number='0B' type='04'/>
+	</hardware>
+	
+	<hardware softwareType ='0003' hardwareType='0168' >
+    	<device number='00' type='00'/>
+        <device number='01' type='31'/>                        
+	</hardware> 
+	
+	<hardware softwareType ='0004' hardwareType='0168' >
+    	<device number='00' type='00'/>
+        <device number='01' type='32'/>
+    </hardware> 
+    
+    <hardware softwareType ='0005' hardwareType='0328' >
+    	<device number='00' type='00'/>
+        <device number='01' type='30'/>
+    </hardware> 
+    
+    <hardware softwareType ='0006' hardwareType='0328' >
+    	<device number='00' type='00'/>
+        <device number='01' type='33'/>
+    </hardware> 
+    
+     <hardware softwareType ='0007' hardwareType='0644' >
+    	<device number='00' type='00'/>
+        <device number='01' type='34'/>
+    </hardware> 
+    
+    <hardware softwareType ='0008' hardwareType='0328' >
+    	<device number='00' type='00'/>
+        <device number='01' type='35'/>
+        <device number='07' type='05'/>
+        <device number='08' type='05'/>
+        <device number='09' type='05'/>           
+	</hardware>
+	
+	<hardware softwareType ='0009' hardwareType='0328' >
+    	<device number='00' type='00'/>
+        <device number='01' type='36'/>                        
+        <device number='07' type='01'/>
+        <device number='08' type='01'/>
+        <device number='09' type='05'/>
+        <device number='0A' type='03'/>
+        <device number='0B' type='04'/>
+	</hardware>
+	
+	<hardware softwareType ='000A' hardwareType='0328' >
+    	<device number='00' type='00'/>
+        <device number='01' type='05'/>                        
+        <device number='02'	type='05'/>                             
+        <device number='03' type='05'/>            
+        <device number='04' type='05'/>
+        <device number='05' type='05'/>
+        <device number='06' type='05'/>
+        <device number='07' type='01'/>
+        <device number='08' type='01'/>
+        <device number='09' type='01'/>
+        <device number='0A' type='03'/>
+        <device number='0B' type='05'/>
+        <device number='0C' type='05'/>
+        <device number='0D' type='05'/>
+	</hardware>
+	
+	<hardware softwareType ='000B' hardwareType='0328' >
+    	<device number='00' type='00'/>
+        <device number='01' type='05'/>                        
+        <device number='02'	type='05'/>                             
+        <device number='03' type='05'/>            
+        <device number='04' type='05'/>
+        <device number='05' type='05'/>
+        <device number='06' type='05'/>
+        <device number='07' type='01'/>
+        <device number='09' type='01'/>
+        <device number='0A' type='03'/>
+        <device number='0B' type='04'/>
+	</hardware>
+	
+	<hardware softwareType ='000C' hardwareType='0328' >
+    	<device number='00' type='00'/>
+        <device number='01' type='01'/>                        
+        <device number='02'	type='01'/>                             
+        <device number='03' type='01'/>            
+        <device number='04' type='01'/>
+        <device number='05' type='01'/>
+        <device number='06' type='01'/>
+        <device number='07' type='01'/>
+        <device number='08' type='01'/>
+	</hardware>
+	
+	<hardware softwareType ='000D' hardwareType='0328' >
+    	<device number='00' type='00'/>
+        <device number='01' type='05'/>                        
+        <device number='02'	type='05'/>                             
+        <device number='03' type='05'/>            
+        <device number='04' type='05'/>
+        <device number='05' type='03'/>
+        <device number='06' type='04'/>
+        <device number='07' type='01'/>
+        <device number='08' type='01'/>
+        <device number='09' type='01'/>
+        <device number='0A' type='01'/>
+	</hardware>
+
+</config>
