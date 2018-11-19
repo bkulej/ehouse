@@ -34,17 +34,23 @@
 			<artifactId>gwt-servlet</artifactId>
 			<version>2.5.1</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>org.atmosphere</groupId>
+			<artifactId>atmosphere-runtime</artifactId>
+			<version>1.1.0.beta3</version>
+		</dependency>
 
 		<dependency>
 			<groupId>org.atmosphere</groupId>
 			<artifactId>atmosphere-gwt-client</artifactId>
-			<version>1.1.0.RC5</version>
+			<version>1.1.0.beta3</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.atmosphere</groupId>
 			<artifactId>atmosphere-gwt-server</artifactId>
-			<version>1.1.0.RC5</version>
+			<version>1.1.0.beta3</version>
 		</dependency>
 
 		<dependency>
