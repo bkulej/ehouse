@@ -30,7 +30,7 @@ public class SerialReciver implements SerialPortEventListener {
 	private final static int FOOTERB = 0xB0;
 	private final static int ERROR = 0xF0;
 
-	private final static Logger log = LoggerFactory.getLogger(SerialReciver.class);
+	private final Logger log = LoggerFactory.getLogger(SerialReciver.class);
 
 	private final List<Integer> message = new ArrayList<>();
 	private int crcCalculated;

@@ -14,6 +14,11 @@ import org.springframework.stereotype.Service;
 
 import pl.np.ehouse.serial.comm.SerialWriter;
 
+/**
+ * 
+ * @author bkulejewski
+ *
+ */
 @Service
 public class NetworkReader {
 

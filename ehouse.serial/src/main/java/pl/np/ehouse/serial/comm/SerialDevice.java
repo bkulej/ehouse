@@ -33,7 +33,7 @@ public class SerialDevice {
 	private final static int STOP_BITS = SerialPort.STOPBITS_1;
 	private final static int BOUND = 38400;
 
-	private static final Logger log = LoggerFactory.getLogger(SerialDevice.class);
+	private final Logger log = LoggerFactory.getLogger(SerialDevice.class);
 
 	private SerialPort serialPort;
 	private InputStream inputStream;

@@ -10,10 +10,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+/**
+ * 
+ * @author bkulejewski
+ *
+ */
 @Service
 public class NetworkServer {
 	
-	private Logger logger = LoggerFactory.getLogger(NetworkServer.class);
+	private final Logger log = LoggerFactory.getLogger(NetworkServer.class);
 
 	@Value("${serial.network.port}")
 	private Integer port;
@@ -27,10 +32,11 @@ public class NetworkServer {
 	 * @throws ClassNotFoundException 
 	 */
 	public void start() throws IOException, ClassNotFoundException {
+		log.info("Opening socket on port {}", port);
 		try (ServerSocket serverSocket = new ServerSocket(port);) {
 			while (true) {
 				Socket socket = serverSocket.accept();
-				logger.debug("Accepted {}", socket);
+				log.debug("Accepted {}", socket);
 				networkReader.start(socket);
 			}
 		}

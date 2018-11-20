@@ -24,7 +24,7 @@ public class SerialWriter {
 	private final static int FOOTERA = 0xA0;
 	private final static int FOOTERB = 0xB0;
 
-	private final static Logger log = LoggerFactory.getLogger(SerialWriter.class);
+	private final Logger log = LoggerFactory.getLogger(SerialWriter.class);
 
 	@Autowired
 	SerialDevice serialDevice;

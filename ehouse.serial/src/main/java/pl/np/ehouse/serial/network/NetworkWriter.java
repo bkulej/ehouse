@@ -11,12 +11,17 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+/**
+ * 
+ * @author bkulejewski
+ *
+ */
 @Service
 public class NetworkWriter {
 	
-	private Logger logger = LoggerFactory.getLogger(NetworkWriter.class);
-
-	private Map<String, ObjectOutputStream> socketStreams = new ConcurrentHashMap<>();
+	private final Logger log = LoggerFactory.getLogger(NetworkWriter.class);
+	
+	private final Map<String, ObjectOutputStream> socketStreams = new ConcurrentHashMap<>();
 
 	/**
 	 * 
@@ -24,7 +29,7 @@ public class NetworkWriter {
 	 * @param outputStream
 	 */
 	public void addSocket(Socket socket, ObjectOutputStream outputStream) {
-		logger.debug("Add {}" , socket);
+		log.debug("Add {}" , socket);
 		socketStreams.put(socket.toString(), outputStream);
 	}
 
@@ -33,7 +38,7 @@ public class NetworkWriter {
 	 * @param socket
 	 */
 	public void removeSocket(Socket socket) {
-		logger.debug("Remove {}" , socket);
+		log.debug("Remove {}" , socket);
 		socketStreams.remove(socket.toString());
 	}
 
