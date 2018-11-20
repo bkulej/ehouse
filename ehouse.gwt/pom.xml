@@ -63,6 +63,7 @@
 
 
 	<build>
+		<finalName>ehouse.gwt</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
