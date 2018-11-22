@@ -23,10 +23,10 @@
 hs_err_pid*
 /.metadata/
 
+/.recommenders/
 /Servers/
 **/.settings
 
 **/.classpath
 **/.project
 target
-/.recommenders
