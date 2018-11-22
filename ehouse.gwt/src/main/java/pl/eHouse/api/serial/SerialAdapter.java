@@ -1,6 +1,7 @@
 package pl.eHouse.api.serial;
 
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -21,6 +22,7 @@ public class SerialAdapter {
 
 	private Socket socket;
 	private ObjectOutputStream outputStream;
+	private ObjectInputStream inputStrem;
 
 	public SerialAdapter(BlockingQueue<Integer> queue) {
 		super();
@@ -32,7 +34,8 @@ public class SerialAdapter {
 			log.info("Connecting to " + address + ":" + port);
 			socket = new Socket(address, port);
 			outputStream = new ObjectOutputStream(socket.getOutputStream());
-			new SerialReceiver(queue, socket).start();
+			inputStrem = new ObjectInputStream(socket.getInputStream());
+			new SerialReceiver(queue, inputStrem).start();
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new ListenerException(e.getMessage());

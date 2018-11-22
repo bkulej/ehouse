@@ -32,13 +32,13 @@ public class SerialReciver implements SerialPortEventListener {
 
 	private final Logger log = LoggerFactory.getLogger(SerialReciver.class);
 
-	private final List<Integer> message = new ArrayList<>();
+	private List<Integer> message;
 	private int crcCalculated;
 	private int crcReceived;
 
 	@Autowired
 	SerialDevice serialDevice;
-	
+
 	@Autowired
 	NetworkWriter networkWriter;
 
@@ -88,7 +88,7 @@ public class SerialReciver implements SerialPortEventListener {
 	 * 
 	 */
 	private int handleHeader(int data) {
-		message.clear();
+		message = new ArrayList<>();
 		message.add(data & 0x0F);
 		crcCalculated = Crc8.update(0, data);
 		return HEADER;
@@ -98,13 +98,12 @@ public class SerialReciver implements SerialPortEventListener {
 	 * 
 	 */
 	private int handleData(int data) {
-		if (message.size() != 0) {
+		if (message != null) {
 			message.add(data);
 			crcCalculated = Crc8.update(crcCalculated, data);
 			return DATA;
 		} else {
-			log.error("Unexpected data {}", data);
-			message.clear();
+			log.debug("Unexpected data {}", data);
 			return ERROR;
 		}
 	}
@@ -113,12 +112,11 @@ public class SerialReciver implements SerialPortEventListener {
 	 * 
 	 */
 	private int handleFooterA(int data) {
-		if (message.size() != 0) {
+		if (message != null) {
 			crcReceived = (data & 0x0F) << 4;
 			return FOOTERA;
 		} else {
-			log.error("Unexpected end {}", data);
-			message.clear();
+			log.debug("Unexpected end {}", data);
 			return ERROR;
 		}
 	}
@@ -127,12 +125,11 @@ public class SerialReciver implements SerialPortEventListener {
 	 * 
 	 */
 	private int handleFooterB(int data) {
-		if (message.size() != 0) {
+		if (message != null) {
 			crcReceived |= data & 0x0F;
 			return crcReceived == crcCalculated ? FOOTERB : ERROR;
 		} else {
-			log.error("Unexpected end {}", data);
-			message.clear();
+			log.debug("Unexpected end {}", data);
 			return ERROR;
 		}
 	}
@@ -143,7 +140,7 @@ public class SerialReciver implements SerialPortEventListener {
 	private void writeMessageToNetwork() {
 		log.debug("Received message {}", message);
 		networkWriter.write(message);
-		message.clear();
+		message = null;
 	}
 
 }

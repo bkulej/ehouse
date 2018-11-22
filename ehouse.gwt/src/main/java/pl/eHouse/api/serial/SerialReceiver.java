@@ -2,7 +2,6 @@ package pl.eHouse.api.serial;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.net.Socket;
 import java.util.List;
 import java.util.concurrent.BlockingQueue;
 import java.util.logging.Logger;
@@ -16,10 +15,10 @@ public class SerialReceiver extends Thread {
 	private BlockingQueue<Integer> queue;
 	private ObjectInputStream inputStream;
 
-	public SerialReceiver(BlockingQueue<Integer> queue, Socket socket) throws IOException {
+	public SerialReceiver(BlockingQueue<Integer> queue, ObjectInputStream inputStream) throws IOException {
 		super();
 		this.queue = queue;
-		this.inputStream = new ObjectInputStream(socket.getInputStream());
+		this.inputStream = inputStream;
 	}
 
 	public void run() {
@@ -38,11 +37,11 @@ public class SerialReceiver extends Thread {
 			List<Integer> message = (List<Integer>) object;
 			log.info("Received message " + message);
 			boolean isType = true;
-			for(Integer data : message) {
-				if(isType) {
+			for (Integer data : message) {
+				if (isType) {
 					data = Header.HEADER | data;
 					isType = false;
-				} 
+				}
 				queue.put(data);
 			}
 			queue.put(Header.FOOTER1);

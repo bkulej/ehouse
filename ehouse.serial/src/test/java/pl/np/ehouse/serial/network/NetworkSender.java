@@ -37,44 +37,36 @@ public class NetworkSender {
 		new Thread(() -> {
 			while (true) {
 				try {
-					System.out.println(new Date() + " received ->" + input.readObject());
+					System.out.println(new Date() + " received -> " + input.readObject());
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
-		}).start();;
+		}).start();
 	}
 
 	/*
 	 * 
 	 */
 	private static void sendMessages(ObjectOutputStream output) throws IOException, InterruptedException {
-		List<Integer> list = prepareMessage();
+		List<Integer> list = prepareExploreMessage();
 		while (true) {
 			output.writeObject(list);
 			output.flush();
-			Thread.sleep(120000);
+			Thread.sleep(10000);
 		}
 	}
 
 	/*
 	 * 
 	 */
-	private static List<Integer> prepareMessage() {
+	private static List<Integer> prepareExploreMessage() {
 		List<Integer> list = new ArrayList<Integer>();
 		list.add(0);
-		list.add(48);
-		list.add(48);
-		list.add(48);
-		list.add(48);
-		list.add(48);
-		list.add(48);
-		list.add(48);
-		list.add(48);
-		list.add(48);
-		list.add(49);
-		list.add(48);
-		list.add(51);
+		String message = "00000000" + "01" + "03";
+		for (byte data : message.getBytes()) {
+			list.add(new Integer(data));
+		}
 		return list;
 	}
 
