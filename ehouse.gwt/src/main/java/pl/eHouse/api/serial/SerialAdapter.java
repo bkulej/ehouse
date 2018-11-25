@@ -59,7 +59,7 @@ public class SerialAdapter {
 			message.add(type);
 			data.forEach(value -> message.add(value));
 			outputStream.writeObject(message);
-			log.info("Send message " + message);
+			log.fine("Send message " + message);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

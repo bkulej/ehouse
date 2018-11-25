@@ -48,7 +48,7 @@ public class WebInputListener {
 
 	public static void messageIn(Object message, GwtAtmosphereResource resource) {
 		Logger.getLogger(WebInputListener.class.getName()).log(
-				Level.INFO, message.toString());
+				Level.FINE, message.toString());
 		if (message instanceof CometSendMessage) { 
 			SendMessageExecutor.execute((CometSendMessage) message,resource);
 		} else if (message instanceof CometNetworkExploreMessage) {

@@ -10,23 +10,16 @@ import java.util.logging.Logger;
 public class Settings {
 
 	private static Properties properties;
-	private static String eHousePath;
+	private static String ehouseProperties;
 
 	public static void init() throws SettingsException {
 		if (properties == null) {
 			// Wyszukanie zmiennej �rodowiskowej
-			eHousePath = "/opt/ehouse"; // System.getenv("EHOUSE_PATH");
-			if (eHousePath == null) {
-				throw new SettingsException("EHOUSE_PATH is not set");
-			}
-			if (!eHousePath.endsWith("\\") && !eHousePath.endsWith("/")) {
-				eHousePath += "/";
-			}
-			Logger.getLogger(Settings.class.getName()).log(Level.INFO, "EHOUSE_PATH=" + eHousePath);
-			// Odczyt properis�w
+			ehouseProperties = "/opt/ehouse/ehouse.gwt.properties"; // System.getenv("EHOUSE_PATH");
+			Logger.getLogger(Settings.class.getName()).log(Level.INFO, "ehouseProperties=" + ehouseProperties);
 			try {
 				Properties tmp = new Properties();
-				tmp.load(new FileInputStream(eHousePath + "gwt.properties"));
+				tmp.load(new FileInputStream(ehouseProperties));
 				properties = tmp;
 			} catch (FileNotFoundException e) {
 				throw new SettingsException(e.getMessage());

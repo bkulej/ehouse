@@ -64,26 +64,23 @@ public class SerialDevice {
 	}
 
 	/**
+	 * @throws IOException 
 	 * 
 	 */
 	@PreDestroy
-	public void close() {
+	public void close() throws IOException {
 		log.info("Closing serial on port {}", port);
-		try {
-			if (inputStream != null) {
-				inputStream.close();
-			}
-		} catch (IOException e) {
+		if (inputStream != null) {
+			inputStream.close();
 		}
-		try {
-			if (outputStream != null) {
-				outputStream.close();
-			}
-		} catch (IOException e) {
+		if (outputStream != null) {
+			outputStream.flush();
+			outputStream.close();
 		}
 		if (serialPort != null) {
 			serialPort.close();
 		}
+		log.info("Closed serial on port {}", port);
 	}
 
 	/**

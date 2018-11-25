@@ -26,7 +26,7 @@ public class NetworkReader {
 
 	@Autowired
 	NetworkWriter networkWriter;
-	
+
 	@Autowired
 	SerialWriter serialWriter;
 
@@ -40,7 +40,7 @@ public class NetworkReader {
 	public void start(Socket socket) throws IOException, ClassNotFoundException {
 		try (ObjectInputStream input = new ObjectInputStream(socket.getInputStream());
 				ObjectOutputStream outputStream = new ObjectOutputStream(socket.getOutputStream());) {
-			log.info("Accepted {}", socket);
+			log.info("Accepted connection {}", socket);
 			networkWriter.addSocket(socket, outputStream);
 			while (true) {
 				writeToSerial(socket, input.readObject());
@@ -48,10 +48,11 @@ public class NetworkReader {
 		} catch (IOException e) {
 		} finally {
 			networkWriter.removeSocket(socket);
-			log.info("Close socket {}", socket);
+			log.info("Closing connection {}", socket);
 			if (!socket.isClosed()) {
 				socket.close();
 			}
+			log.info("Closed connection {}", socket);
 		}
 	}
 

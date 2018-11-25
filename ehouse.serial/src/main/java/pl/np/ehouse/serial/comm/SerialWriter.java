@@ -36,7 +36,7 @@ public class SerialWriter {
 	 * 
 	 * @param message
 	 */
-	public void write(List<Integer> message) {
+	public synchronized void write(List<Integer> message) {
 		try {
 			serialDevice.startSend();
 			OutputStream outputStream = serialDevice.getOutputStream();

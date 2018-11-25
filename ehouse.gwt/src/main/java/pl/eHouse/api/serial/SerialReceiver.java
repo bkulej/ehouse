@@ -35,7 +35,7 @@ public class SerialReceiver extends Thread {
 	private void writeToQueue(Object object) throws InterruptedException {
 		if (object instanceof List) {
 			List<Integer> message = (List<Integer>) object;
-			log.info("Received message " + message);
+			log.fine("Received message " + message);
 			boolean isType = true;
 			for (Integer data : message) {
 				if (isType) {
