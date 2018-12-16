@@ -25,15 +25,15 @@ import org.springframework.stereotype.Service;
 @Service
 public class SocketConnection implements Connection, Runnable {
 
+	private final Logger log = LoggerFactory.getLogger(SocketConnection.class);
+	
 	@Value("${core.connection.socket.host}")
 	private String host;
 
 	@Value("${core.connection.socket.port}")
 	private int port;
 
-	private final Logger log = LoggerFactory.getLogger(SocketConnection.class);
 	private final BlockingQueue<List<Integer>> inputQueue = new LinkedBlockingQueue<List<Integer>>();
-
 	private Socket socket;
 	private ObjectOutputStream outputStream;
 	private ObjectInputStream inputStream;
@@ -77,7 +77,7 @@ public class SocketConnection implements Connection, Runnable {
 	@Override
 	public void run() {
 		try {
-			log.info("Start thread {}", this.getClass());
+			log.info("Start service {}", this.getClass());
 			while (true) {
 				Object message = inputStream.readObject();
 				if (message instanceof List) {
@@ -87,7 +87,7 @@ public class SocketConnection implements Connection, Runnable {
 		} catch (Exception e) {
 			log.info("{}", e.getMessage());
 		} finally {
-			log.info("End of thread {}", this.getClass());
+			log.info("End of service {}", this.getClass());
 		}
 	}
 

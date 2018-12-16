@@ -9,6 +9,8 @@ import org.springframework.core.task.TaskExecutor;
 import org.springframework.stereotype.Service;
 
 import pl.np.ehouse.core.connection.SocketConnection;
+import pl.np.ehouse.core.message.MessageReader;
+import pl.np.ehouse.core.message.MessageSender;
 
 /**
  * 
@@ -16,7 +18,7 @@ import pl.np.ehouse.core.connection.SocketConnection;
  *
  */
 @Service
-public class ServicesStarter {
+public class EhouseThreads {
 
 	@Autowired
 	private ApplicationContext applicationContext;
@@ -26,7 +28,7 @@ public class ServicesStarter {
 	TaskExecutor taskExecutor;
 
 	@PostConstruct
-	public void startServices() {
+	public void startThreads() {
 		taskExecutor.execute(applicationContext.getBean(SocketConnection.class));
 		taskExecutor.execute(applicationContext.getBean(MessageReader.class));
 		taskExecutor.execute(applicationContext.getBean(MessageSender.class));
