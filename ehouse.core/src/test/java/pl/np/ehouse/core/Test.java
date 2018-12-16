@@ -1,4 +1,4 @@
-package pl.np.ehouse;
+package pl.np.ehouse.core;
 
 public class Test {
 
