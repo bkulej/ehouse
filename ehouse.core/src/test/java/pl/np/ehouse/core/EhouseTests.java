@@ -7,5 +7,4 @@ import org.junit.runner.RunWith;
 @RunWith(JUnitPlatform.class)
 @SelectPackages("pl.np.ehouse.core.test")
 public class EhouseTests {
-
 }
