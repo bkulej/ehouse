@@ -15,7 +15,7 @@ public class MessageImpl implements Message {
 	public final static int TYPE_BOOT = 0x03;
 
 	private int type;
-	private long serial;
+	private int serial;
 	private int asd;
 	private int add;
 	private int id;
@@ -55,7 +55,7 @@ public class MessageImpl implements Message {
 	 * @return
 	 * @throws MessageException
 	 */
-	public long getSerial() throws MessageException {
+	public int getSerial() throws MessageException {
 		if (type != TYPE_SERIAL && type != TYPE_BOOT) {
 			throw new MessageException("Bad message type");
 		}
@@ -67,7 +67,7 @@ public class MessageImpl implements Message {
 	 * @param serial
 	 * @throws MessageException
 	 */
-	public void setSerial(long serial) throws MessageException {
+	public void setSerial(int serial) throws MessageException {
 		if (type != TYPE_SERIAL && type != TYPE_BOOT) {
 			throw new MessageException("Bad message type");
 		}

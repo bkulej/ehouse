@@ -20,7 +20,7 @@ public interface Message {
 	 * @return
 	 * @throws MessageException
 	 */
-	public long getSerial() throws MessageException;
+	public int getSerial() throws MessageException;
 
 	/**
 	 * 

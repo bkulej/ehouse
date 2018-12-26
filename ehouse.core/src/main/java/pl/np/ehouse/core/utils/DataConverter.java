@@ -1,7 +1,5 @@
 package pl.np.ehouse.core.utils;
 
-import java.util.List;
-
 /**
  * 
  * @author Bartek
@@ -11,62 +9,11 @@ public class DataConverter {
 
 	/**
 	 * 
-	 * @param data
-	 * @param position
-	 * @return
-	 * @throws DataConvertException
-	 */
-	public static int getByte(List<Integer> data, int position) throws DataConvertException {
-		try {
-			int value = getDigitFromHexAscii(data.get(position)) << 4;
-			value |= getDigitFromHexAscii(data.get(position + 1));
-			return value;
-		} catch (IndexOutOfBoundsException e) {
-			throw new DataConvertException("Data index out of bounds");
-		}
-	}
-
-	/**
-	 * 
-	 * @param data
-	 * @param position
-	 * @return
-	 * @throws DataConvertException
-	 */
-	public static int getWord(List<Integer> data, int position) throws DataConvertException {
-		try {
-			int value = getByte(data, position) << 8;
-			value |= getByte(data, position + 2);
-			return value;
-		} catch (IndexOutOfBoundsException e) {
-			throw new DataConvertException("Data index out of bounds");
-		}
-	}
-
-	/**
-	 * 
-	 * @param data
-	 * @param position
-	 * @return
-	 * @throws DataConvertException
-	 */
-	public static long getDouble(List<Integer> data, int position) throws DataConvertException {
-		try {
-			long value = ((long) getWord(data, position)) << 16;
-			value |= getWord(data, position + 4);
-			return value;
-		} catch (IndexOutOfBoundsException e) {
-			throw new DataConvertException("Data index out of bounds");
-		}
-	}
-
-	/**
-	 * 
 	 * @param ascii
 	 * @return
 	 * @throws DataConvertException
 	 */
-	public static int getDigitFromHexAscii(int ascii) throws DataConvertException {
+	public static int hexAsciiToDigit(int ascii) throws DataConvertException {
 		if (ascii >= '0' && ascii <= '9') {
 			return ascii - '0';
 		} else if (ascii >= 'A' && ascii <= 'F') {
@@ -76,6 +23,67 @@ public class DataConverter {
 		} else {
 			throw new DataConvertException("Incorrect ascii sign");
 		}
+	}
+
+	/**
+	 * 
+	 * @param value
+	 * @return
+	 * @throws DataConvertException
+	 */
+	public static int digitToHexAscii(int value) throws DataConvertException {
+		if (value >= 0 && value <= 9) {
+			return '0' + value;
+		} else if (value >= 10 && value <= 15) {
+			return 'A' + value - 10;
+		} else {
+			throw new DataConvertException("Incorrect hex digit");
+		}
+	}
+
+	/**
+	 * 
+	 * @param data
+	 * @return
+	 * @throws DataConvertException
+	 */
+	public static String byteToHexString(int data) throws DataConvertException {
+		return integerToHexString(data, 2);
+	}
+
+	/**
+	 * 
+	 * @param data
+	 * @return
+	 * @throws DataConvertException
+	 */
+	public static String wordToHexString(int data) throws DataConvertException {
+		return integerToHexString(data, 4);
+	}
+
+	/**
+	 * 
+	 * @param data
+	 * @return
+	 * @throws DataConvertException
+	 */
+	public static String doubleToHexString(int data) throws DataConvertException {
+		return integerToHexString(data, 8);
+	}
+
+	/*
+	 * 
+	 */
+	private static String integerToHexString(int data, int position) throws DataConvertException {
+		StringBuilder result = new StringBuilder();
+		result.append(Integer.toHexString(data).toUpperCase());
+		if (result.length() > position) {
+			throw new DataConvertException("Number too large");
+		}
+		while (result.length() < position) {
+			result.insert(0, "0");
+		}
+		return result.toString();
 	}
 
 }
