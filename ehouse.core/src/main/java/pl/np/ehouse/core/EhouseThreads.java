@@ -9,8 +9,6 @@ import org.springframework.core.task.TaskExecutor;
 import org.springframework.stereotype.Service;
 
 import pl.np.ehouse.core.connection.SocketConnection;
-import pl.np.ehouse.core.message.MessageReader;
-import pl.np.ehouse.core.message.MessageSender;
 
 /**
  * 
