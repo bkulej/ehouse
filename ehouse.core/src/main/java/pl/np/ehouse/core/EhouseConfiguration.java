@@ -6,16 +6,14 @@ import org.springframework.core.task.SimpleAsyncTaskExecutor;
 import org.springframework.core.task.TaskExecutor;
 
 /**
- * 
  * @author Bartek
- *
  */
 @Configuration
-public class EhouseConfiguration {
-	
-	@Bean
-	public TaskExecutor threadTaskExecutor() {
-		return new SimpleAsyncTaskExecutor();
-	}
-	
+class EhouseConfiguration {
+
+    @Bean
+    public TaskExecutor threadTaskExecutor() {
+        return new SimpleAsyncTaskExecutor();
+    }
+
 }

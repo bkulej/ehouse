@@ -1,0 +1,14 @@
+{
+  "properties": [
+    {
+      "name": "serial.comm.port",
+      "type": "java.lang.String",
+      "description": "Description for serial.comm.port."
+    },
+    {
+      "name": "serial.network.port",
+      "type": "java.lang.String",
+      "description": "Description for serial.network.port."
+    }
+  ]
+}

@@ -5,7 +5,7 @@ package pl.np.ehouse.serial.comm;
  * @author Bartek
  *
  */
-public class Crc8 {
+class Crc8 {
 
 	/**
 	 * 
@@ -13,7 +13,8 @@ public class Crc8 {
 	 * @param value
 	 * @return
 	 */
-	public static int update(int crc, int value) {
+	@SuppressWarnings("JavaDoc")
+    public static int update(int crc, int value) {
 		crc ^= value;
 		for (int i = 0; i < 8; i++) {
 			if ((crc & 0x01) == 1) {

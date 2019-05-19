@@ -26,7 +26,7 @@ import gnu.io.UnsupportedCommOperationException;
  *
  */
 @Service
-public class SerialDevice {
+class SerialDevice {
 
 	private final static int DATA_BITS = SerialPort.DATABITS_8;
 	private final static int PARITY_EVEN = SerialPort.PARITY_EVEN;
@@ -44,15 +44,13 @@ public class SerialDevice {
 
 	/**
 	 * 
-	 * @throws PortInUseException
-	 * @throws NoSuchPortException
-	 * @throws UnsupportedCommOperationException
-	 * @throws IOException
-	 * @throws TooManyListenersException
+	 * @throws PortInUseException -
+	 * @throws NoSuchPortException -
+	 * @throws UnsupportedCommOperationException -
+	 * @throws IOException -
 	 */
 	@PostConstruct
-	public void open() throws PortInUseException, NoSuchPortException, UnsupportedCommOperationException, IOException,
-			TooManyListenersException {
+	public void open() throws PortInUseException, NoSuchPortException, UnsupportedCommOperationException, IOException {
 		log.info("Opening serial on port {}", port);
 		serialPort = (SerialPort) CommPortIdentifier.getPortIdentifier(port).open(this.getClass().getName(), 2000);
 		serialPort.setSerialPortParams(BOUND, DATA_BITS, STOP_BITS, PARITY_EVEN);
@@ -64,7 +62,7 @@ public class SerialDevice {
 	}
 
 	/**
-	 * @throws IOException 
+	 * @throws IOException  -
 	 * 
 	 */
 	@PreDestroy
@@ -85,7 +83,7 @@ public class SerialDevice {
 
 	/**
 	 * 
-	 * @throws IOException
+	 * @throws IOException -
 	 */
 	public void startSend() throws IOException {
 		log.debug("Start sending message");
@@ -96,7 +94,7 @@ public class SerialDevice {
 
 	/**
 	 * 
-	 * @throws IOException
+	 * @throws IOException -
 	 */
 	public void stopSend() throws IOException {
 		outputStream.write(0);
@@ -106,22 +104,22 @@ public class SerialDevice {
 	}
 
 	/**
-	 * @return
+	 * @return -
 	 */
 	public InputStream getInputStream() {
 		return inputStream;
 	}
 
 	/**
-	 * @return
+	 * @return -
 	 */
 	public OutputStream getOutputStream() {
 		return outputStream;
 	}
 
 	/**
-	 * @param listener
-	 * @throws TooManyListenersException
+	 * @param listener -
+	 * @throws TooManyListenersException -
 	 */
 	public void addEventListener(SerialPortEventListener listener) throws TooManyListenersException {
 		serialPort.addEventListener(listener);

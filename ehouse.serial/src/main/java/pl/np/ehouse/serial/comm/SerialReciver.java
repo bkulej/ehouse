@@ -22,7 +22,7 @@ import pl.np.ehouse.serial.network.NetworkWriter;
  *
  */
 @Service
-public class SerialReciver implements SerialPortEventListener {
+class SerialReciver implements SerialPortEventListener {
 
 	private final static int HEADER = 0x80;
 	private final static int DATA = 0x90;
@@ -36,15 +36,18 @@ public class SerialReciver implements SerialPortEventListener {
 	private int crcCalculated;
 	private int crcReceived;
 
-	@Autowired
-	SerialDevice serialDevice;
+	private final SerialDevice serialDevice;
+	private final NetworkWriter networkWriter;
 
-	@Autowired
-	NetworkWriter networkWriter;
+    @Autowired
+    public SerialReciver(SerialDevice serialDevice, NetworkWriter networkWriter) {
+        this.serialDevice = serialDevice;
+		this.networkWriter = networkWriter;
+    }
 
-	/**
+    /**
 	 * 
-	 * @throws TooManyListenersException
+	 * @throws TooManyListenersException -
 	 */
 	@PostConstruct
 	public void init() throws TooManyListenersException {
@@ -52,7 +55,8 @@ public class SerialReciver implements SerialPortEventListener {
 	}
 
 	/**
-	 * 
+	 *
+	 * @param event -
 	 */
 	@Override
 	public void serialEvent(SerialPortEvent event) {
@@ -74,7 +78,8 @@ public class SerialReciver implements SerialPortEventListener {
 	private int decodeData(int data) {
 		switch (data & 0xF0) {
 		case HEADER:
-			return handleHeader(data);
+			handleHeader(data);
+			return HEADER;
 		case FOOTERA:
 			return handleFooterA(data);
 		case FOOTERB:
@@ -87,11 +92,10 @@ public class SerialReciver implements SerialPortEventListener {
 	/*
 	 * 
 	 */
-	private int handleHeader(int data) {
+	private void handleHeader(int data) {
 		message = new ArrayList<>();
 		message.add(data & 0x0F);
 		crcCalculated = Crc8.update(0, data);
-		return HEADER;
 	}
 
 	/*

@@ -20,12 +20,19 @@ import org.springframework.stereotype.Service;
 public class NetworkWriter {
 	
 	private final Logger log = LoggerFactory.getLogger(NetworkWriter.class);
-	private final Map<String, ObjectOutputStream> socketStreams = new ConcurrentHashMap<>();
+	private final Map<String, ObjectOutputStream> socketStreams;
+
+	/**
+	 *
+	 */
+	public NetworkWriter() {
+		socketStreams = new ConcurrentHashMap<>();
+	}
 
 	/**
 	 * 
-	 * @param socket
-	 * @param outputStream
+	 * @param socket -
+	 * @param outputStream -
 	 */
 	public void addSocket(Socket socket, ObjectOutputStream outputStream) {
 		log.info("Add connection {}" , socket);
@@ -34,7 +41,7 @@ public class NetworkWriter {
 
 	/**
 	 * 
-	 * @param socket
+	 * @param socket -
 	 */
 	public void removeSocket(Socket socket) {
 		log.info("Remove connection {}" , socket);
@@ -43,7 +50,7 @@ public class NetworkWriter {
 
 	/**
 	 * 
-	 * @param message
+	 * @param message -
 	 */
 	public void write(List<Integer> message) {
 		socketStreams.forEach((key, outputStream) -> {
@@ -51,6 +58,7 @@ public class NetworkWriter {
 				outputStream.writeObject(message);
 				outputStream.flush();
 			} catch (IOException e) {
+				log.error("Exception durring writing to output stream",e);
 			}
 		});
 	}

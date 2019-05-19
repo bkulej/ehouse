@@ -1,0 +1,24 @@
+{
+  "properties": [
+    {
+      "name": "core.connection.socket.port",
+      "type": "java.lang.String",
+      "description": "Description for core.connection.socket.port."
+    },
+    {
+      "name": "core.connection.socket.host",
+      "type": "java.lang.String",
+      "description": "Description for core.connection.socket.host."
+    },
+    {
+      "name": "code.sender.repeat.count",
+      "type": "java.lang.String",
+      "description": "Description for code.sender.repeat.count."
+    },
+    {
+      "name": "code.sender.repeat.sleep",
+      "type": "java.lang.String",
+      "description": "Description for code.sender.repeat.sleep."
+    }
+  ]
+}
