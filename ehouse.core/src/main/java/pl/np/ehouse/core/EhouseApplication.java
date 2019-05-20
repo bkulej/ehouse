@@ -10,7 +10,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 class EhouseApplication {
 
     /**
-     *
      * @param args -
      */
     public static void main(String[] args) {

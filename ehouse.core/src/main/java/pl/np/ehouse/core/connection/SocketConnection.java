@@ -34,7 +34,6 @@ public class SocketConnection implements Connection, Runnable {
     private volatile boolean started = true;
 
     /**
-     *
      * @param host -
      * @param port -
      */
@@ -46,7 +45,6 @@ public class SocketConnection implements Connection, Runnable {
     }
 
     /**
-     *
      * @throws IOException -
      */
     @PostConstruct
@@ -58,7 +56,6 @@ public class SocketConnection implements Connection, Runnable {
     }
 
     /**
-     *
      * @throws IOException -
      */
     @PreDestroy

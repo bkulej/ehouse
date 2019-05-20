@@ -48,7 +48,7 @@ public class MessageImpl implements Message {
     }
 
     /**
-     * @return  -
+     * @return -
      * @throws MessageException -
      */
     public int getSerial() throws MessageException {
@@ -148,8 +148,7 @@ public class MessageImpl implements Message {
     }
 
     /**
-     *
-     * @return  -
+     * @return -
      */
     public boolean isSerial() {
         return type == TYPE_SERIAL;
@@ -167,7 +166,6 @@ public class MessageImpl implements Message {
     }
 
     /**
-     *
      * @return -
      */
     public boolean isAddress() {
@@ -175,7 +173,6 @@ public class MessageImpl implements Message {
     }
 
     /**
-     *
      * @return -
      */
     public boolean isBoot() {

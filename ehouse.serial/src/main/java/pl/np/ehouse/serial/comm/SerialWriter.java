@@ -16,10 +16,6 @@ import java.util.List;
 @Service
 public class SerialWriter {
 
-    private final static int HEADER = 0x80;
-    private final static int FOOTERA = 0xA0;
-    private final static int FOOTERB = 0xB0;
-
     private final Logger log = LoggerFactory.getLogger(SerialWriter.class);
     private final SerialDevice serialDevice;
 
@@ -60,14 +56,14 @@ public class SerialWriter {
         boolean isHeader = true;
         for (int value : messageInput) {
             if (isHeader) {
-                value = HEADER | value;
+                value = SerialConst.HEADER | value;
                 isHeader = false;
             }
             crc = Crc8.update(crc, value);
             messageOutput.add(value);
         }
-        messageOutput.add(FOOTERA | ((crc >> 4) & 0x0F));
-        messageOutput.add(FOOTERB | (crc & 0x0F));
+        messageOutput.add(SerialConst.FOOTERA | ((crc >> 4) & 0x0F));
+        messageOutput.add(SerialConst.FOOTERB | (crc & 0x0F));
         log.debug("Message sended {}", messageOutput);
         return messageOutput;
     }

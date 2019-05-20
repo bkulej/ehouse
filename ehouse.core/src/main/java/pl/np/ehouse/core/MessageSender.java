@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.np.ehouse.core.connection.Connection;
 import pl.np.ehouse.core.message.Message;
-import pl.np.ehouse.core.message.MessageConverter;
+import pl.np.ehouse.core.message.MessageFactory;
 
 import javax.annotation.PreDestroy;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -45,7 +45,7 @@ class MessageSender implements Runnable {
             log.info("Start service {}", this.getClass());
             while (started) {
                 Message message = outputQueue.take();
-                connection.send(MessageConverter.messageToList(message));
+                connection.send(MessageFactory.toList(message));
             }
         } catch (Exception e) {
             log.error("Error ", e);

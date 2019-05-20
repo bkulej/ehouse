@@ -1,5 +1,7 @@
 package pl.np.ehouse.core.utils;
 
+import java.util.List;
+
 /**
  * @author Bartek
  */
@@ -79,4 +81,84 @@ public class DataConverter {
         return result.toString();
     }
 
+    /**
+     * @param data     -
+     * @param position -
+     * @return -
+     * @throws DataConvertException -
+     */
+    public static int getDoubleFromHexAsciiList(List<Integer> data, int position)
+            throws DataConvertException {
+        try {
+            int value = getWordFromHexAsciiList(data, position) << 16;
+            value |= getWordFromHexAsciiList(data, position + 4);
+            return value;
+        } catch (IndexOutOfBoundsException e) {
+            throw new DataConvertException("Data index out of bounds");
+        }
+    }
+
+    /**
+     * @param data     -
+     * @param position -
+     * @return -
+     * @throws DataConvertException -
+     */
+    public static int getWordFromHexAsciiList(List<Integer> data, int position)
+            throws DataConvertException {
+        try {
+            int value = getByteFromHexAsciiList(data, position) << 8;
+            value |= getByteFromHexAsciiList(data, position + 2);
+            return value;
+        } catch (IndexOutOfBoundsException e) {
+            throw new DataConvertException("Data index out of bounds");
+        }
+    }
+
+    /**
+     * @param data     -
+     * @param position -
+     * @return -
+     * @throws DataConvertException -
+     */
+    public static int getByteFromHexAsciiList(List<Integer> data, int position)
+            throws DataConvertException {
+        try {
+            int value = hexAsciiToDigit(data.get(position)) << 4;
+            value |= hexAsciiToDigit(data.get(position + 1));
+            return value;
+        } catch (IndexOutOfBoundsException e) {
+            throw new DataConvertException("Data index out of bounds");
+        }
+    }
+
+    /**
+     * @param data  -
+     * @param value -
+     * @throws DataConvertException -
+     */
+    public static void addByteToHexAsciiList(List<Integer> data, int value) throws DataConvertException {
+        data.add(digitToHexAscii((value >> 4) & 0xFF));
+        data.add(digitToHexAscii(value & 0x0F));
+    }
+
+    /**
+     * @param data  -
+     * @param value -
+     * @throws DataConvertException -
+     */
+    public static void addWordToHexAsciiList(List<Integer> data, int value) throws DataConvertException {
+        addByteToHexAsciiList(data, (value >> 8) & 0xFF);
+        addByteToHexAsciiList(data, value & 0xFF);
+    }
+
+    /**
+     * @param data  -
+     * @param value -
+     * @throws DataConvertException -
+     */
+    public static void addDoubleToHexAsciiList(List<Integer> data, int value) throws DataConvertException {
+        addWordToHexAsciiList(data, (value >> 16) & 0xFFFF);
+        addWordToHexAsciiList(data, value & 0xFFFF);
+    }
 }

@@ -2,8 +2,13 @@ package pl.np.ehouse.core.test;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import pl.np.ehouse.core.message.MessageException;
 import pl.np.ehouse.core.utils.DataConvertException;
 import pl.np.ehouse.core.utils.DataConverter;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author Bartek
@@ -133,6 +138,64 @@ class DataConverterTest {
             Assertions.assertEquals("9ABCDEF0", DataConverter.doubleToHexString(0x9ABCDEF0));
             Assertions.assertEquals("FFFFFFFF", DataConverter.doubleToHexString(0xFFFFFFFF));
         } catch (DataConvertException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    void testGetByteFromHexAsciiList() {
+        try {
+            List<Integer> data = "0ACD120B".chars().boxed().collect(Collectors.toList());
+            Assertions.assertEquals(0x0A, DataConverter.getByteFromHexAsciiList(data, 0));
+            Assertions.assertEquals(0xCD, DataConverter.getByteFromHexAsciiList(data, 2));
+            Assertions.assertEquals(0x12, DataConverter.getByteFromHexAsciiList(data, 4));
+            Assertions.assertEquals(0x0B, DataConverter.getByteFromHexAsciiList(data, 6));
+            Assertions.assertThrows(MessageException.class, () -> DataConverter.getByteFromHexAsciiList(data, 7));
+            Assertions.assertThrows(MessageException.class, () -> DataConverter.getByteFromHexAsciiList(data, 8));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    void testGetWordFromHexAsciiList() {
+        try {
+            List<Integer> data = "0ACD120B".chars().boxed().collect(Collectors.toList());
+            Assertions.assertEquals(0x0ACD, DataConverter.getWordFromHexAsciiList(data, 0));
+            Assertions.assertEquals(0x120B, DataConverter.getWordFromHexAsciiList(data, 4));
+            Assertions.assertThrows(MessageException.class, () -> DataConverter.getWordFromHexAsciiList(data, 5));
+            Assertions.assertThrows(MessageException.class, () -> DataConverter.getWordFromHexAsciiList(data, 8));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    void testGetDoubleFromHexAsciiList() {
+        try {
+            List<Integer> data = "0ACD120B10B3113F".chars().boxed()
+                    .collect(Collectors.toList());
+            Assertions.assertEquals(0x0ACD120BL, DataConverter.getDoubleFromHexAsciiList(data, 0));
+            Assertions.assertEquals(0x10B3113FL, DataConverter.getDoubleFromHexAsciiList(data, 8));
+            Assertions.assertThrows(MessageException.class, () -> DataConverter.getDoubleFromHexAsciiList(data, 9));
+            Assertions.assertThrows(MessageException.class, () -> DataConverter.getDoubleFromHexAsciiList(data, 16));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    void testAddDataToHexAsciiList() {
+        try {
+            List<Integer> data = new ArrayList<>();
+            DataConverter.addByteToHexAsciiList(data, 0x01);
+            DataConverter.addByteToHexAsciiList(data, 0x23);
+            DataConverter.addWordToHexAsciiList(data, 0x4567);
+            DataConverter.addDoubleToHexAsciiList(data, 0x89ABCDEF);
+            List<Integer> result = "0123456789ABCDEF".chars().boxed()
+                    .collect(Collectors.toList());
+            Assertions.assertIterableEquals(result, data);
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

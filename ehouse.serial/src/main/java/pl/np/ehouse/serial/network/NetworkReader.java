@@ -1,20 +1,18 @@
 package pl.np.ehouse.serial.network;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.net.Socket;
-import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
-
 import pl.np.ehouse.serial.comm.SerialWriter;
 
 import javax.annotation.PreDestroy;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.Socket;
+import java.util.List;
 
 /**
  * @author bkulejewski
@@ -36,7 +34,7 @@ class NetworkReader {
 
     /**
      * @param socket -
-     * @throws IOException -
+     * @throws IOException            -
      * @throws ClassNotFoundException -
      */
     @Async
@@ -46,7 +44,7 @@ class NetworkReader {
             log.info("Accepted connection {}", socket);
             networkWriter.addSocket(socket, outputStream);
             while (started) {
-               writeToSerial(input.readObject());
+                writeToSerial(input.readObject());
             }
         } catch (IOException e) {
             log.info("Closing connection bye exception{}", socket);
@@ -70,7 +68,7 @@ class NetworkReader {
 
     /*
      */
-    private void writeToSerial(Object object ) {
+    private void writeToSerial(Object object) {
         if (object instanceof List) {
             @SuppressWarnings("unchecked")
             List<Integer> list = (List<Integer>) object;

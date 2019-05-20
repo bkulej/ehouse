@@ -20,7 +20,6 @@ class MessageReader implements Runnable {
     private volatile boolean started = true;
 
     /**
-     *
      * @param connection -
      */
     @Autowired
