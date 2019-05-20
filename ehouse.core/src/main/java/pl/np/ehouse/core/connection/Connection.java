@@ -6,7 +6,6 @@ import java.util.List;
 /**
  * @author Bartek
  */
-@SuppressWarnings("ALL")
 public interface Connection {
 
     /**

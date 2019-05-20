@@ -13,7 +13,6 @@ class Crc8 {
 	 * @param value
 	 * @return
 	 */
-	@SuppressWarnings("JavaDoc")
     public static int update(int crc, int value) {
 		crc ^= value;
 		for (int i = 0; i < 8; i++) {
