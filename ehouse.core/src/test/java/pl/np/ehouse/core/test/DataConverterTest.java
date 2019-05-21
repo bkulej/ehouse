@@ -2,7 +2,6 @@ package pl.np.ehouse.core.test;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import pl.np.ehouse.core.message.MessageException;
 import pl.np.ehouse.core.utils.DataConvertException;
 import pl.np.ehouse.core.utils.DataConverter;
 
@@ -150,8 +149,8 @@ class DataConverterTest {
             Assertions.assertEquals(0xCD, DataConverter.getByteFromHexAsciiList(data, 2));
             Assertions.assertEquals(0x12, DataConverter.getByteFromHexAsciiList(data, 4));
             Assertions.assertEquals(0x0B, DataConverter.getByteFromHexAsciiList(data, 6));
-            Assertions.assertThrows(MessageException.class, () -> DataConverter.getByteFromHexAsciiList(data, 7));
-            Assertions.assertThrows(MessageException.class, () -> DataConverter.getByteFromHexAsciiList(data, 8));
+            Assertions.assertThrows(DataConvertException.class, () -> DataConverter.getByteFromHexAsciiList(data, 7));
+            Assertions.assertThrows(DataConvertException.class, () -> DataConverter.getByteFromHexAsciiList(data, 8));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -163,8 +162,8 @@ class DataConverterTest {
             List<Integer> data = "0ACD120B".chars().boxed().collect(Collectors.toList());
             Assertions.assertEquals(0x0ACD, DataConverter.getWordFromHexAsciiList(data, 0));
             Assertions.assertEquals(0x120B, DataConverter.getWordFromHexAsciiList(data, 4));
-            Assertions.assertThrows(MessageException.class, () -> DataConverter.getWordFromHexAsciiList(data, 5));
-            Assertions.assertThrows(MessageException.class, () -> DataConverter.getWordFromHexAsciiList(data, 8));
+            Assertions.assertThrows(DataConvertException.class, () -> DataConverter.getWordFromHexAsciiList(data, 5));
+            Assertions.assertThrows(DataConvertException.class, () -> DataConverter.getWordFromHexAsciiList(data, 8));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -177,8 +176,8 @@ class DataConverterTest {
                     .collect(Collectors.toList());
             Assertions.assertEquals(0x0ACD120BL, DataConverter.getDoubleFromHexAsciiList(data, 0));
             Assertions.assertEquals(0x10B3113FL, DataConverter.getDoubleFromHexAsciiList(data, 8));
-            Assertions.assertThrows(MessageException.class, () -> DataConverter.getDoubleFromHexAsciiList(data, 9));
-            Assertions.assertThrows(MessageException.class, () -> DataConverter.getDoubleFromHexAsciiList(data, 16));
+            Assertions.assertThrows(DataConvertException.class, () -> DataConverter.getDoubleFromHexAsciiList(data, 9));
+            Assertions.assertThrows(DataConvertException.class, () -> DataConverter.getDoubleFromHexAsciiList(data, 16));
         } catch (Exception e) {
             e.printStackTrace();
         }
