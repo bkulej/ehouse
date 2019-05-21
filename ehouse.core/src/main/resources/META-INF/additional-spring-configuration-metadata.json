@@ -3,7 +3,7 @@
     {
       "name": "core.connection.socket.port",
       "type": "java.lang.Integer",
-      "description": "Socket number on the host"
+      "description": "Socket number on the host."
     },
     {
       "name": "core.connection.socket.host",
@@ -13,12 +13,12 @@
     {
       "name": "code.sender.repeat.count",
       "type": "java.lang.Integer",
-      "description": "How many times to repeat a message"
+      "description": "How many times to repeat a message."
     },
     {
       "name": "code.sender.repeat.interval",
       "type": "java.lang.Integer",
-      "description": "Interval between message repetitions"
+      "description": "Interval between message repetitions."
     }
   ]
 }
