@@ -1,4 +1,4 @@
-package pl.np.ehouse.core.utils;
+package pl.np.ehouse.core.message.utils;
 
 import java.util.List;
 

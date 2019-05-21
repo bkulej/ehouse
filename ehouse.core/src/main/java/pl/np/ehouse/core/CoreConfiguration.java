@@ -9,7 +9,7 @@ import org.springframework.core.task.TaskExecutor;
  * @author Bartek
  */
 @Configuration
-class EhouseConfiguration {
+class CoreConfiguration {
 
     @Bean
     public TaskExecutor threadTaskExecutor() {

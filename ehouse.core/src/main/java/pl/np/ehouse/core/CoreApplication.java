@@ -7,13 +7,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @author Bartek
  */
 @SpringBootApplication
-class EhouseApplication {
+class CoreApplication {
 
     /**
      * @param args -
      */
     public static void main(String[] args) {
-        SpringApplication.run(EhouseApplication.class, args);
+        SpringApplication.run(CoreApplication.class, args);
     }
 
 }

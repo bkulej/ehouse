@@ -1,10 +1,10 @@
 package pl.np.ehouse.core.message;
 
-import pl.np.ehouse.core.utils.DataConvertException;
-import pl.np.ehouse.core.utils.DataConverter;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import pl.np.ehouse.core.message.utils.DataConvertException;
+import pl.np.ehouse.core.message.utils.DataConverter;
 
 /**
  * @author Bartek

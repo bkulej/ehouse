@@ -16,13 +16,13 @@ import pl.np.ehouse.core.message.MessageSender;
  * @author Bartek
  */
 @Service
-class EhouseThreads {
+class ThreadsRunner {
 
     private final ApplicationContext applicationContext;
     private final TaskExecutor taskExecutor;
 
     @Autowired
-    public EhouseThreads(ApplicationContext applicationContext,
+    public ThreadsRunner(ApplicationContext applicationContext,
             @Qualifier("threadTaskExecutor") TaskExecutor taskExecutor) {
         this.applicationContext = applicationContext;
         this.taskExecutor = taskExecutor;
