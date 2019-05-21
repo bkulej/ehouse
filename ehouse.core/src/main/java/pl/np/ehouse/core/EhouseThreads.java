@@ -1,13 +1,16 @@
 package pl.np.ehouse.core;
 
+import javax.annotation.PostConstruct;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.task.TaskExecutor;
 import org.springframework.stereotype.Service;
-import pl.np.ehouse.core.connection.SocketConnection;
 
-import javax.annotation.PostConstruct;
+import pl.np.ehouse.core.connection.SocketConnection;
+import pl.np.ehouse.core.message.MessageDecoder;
+import pl.np.ehouse.core.message.MessageSender;
 
 /**
  * @author Bartek
@@ -19,7 +22,8 @@ class EhouseThreads {
     private final TaskExecutor taskExecutor;
 
     @Autowired
-    public EhouseThreads(ApplicationContext applicationContext, @Qualifier("threadTaskExecutor") TaskExecutor taskExecutor) {
+    public EhouseThreads(ApplicationContext applicationContext,
+            @Qualifier("threadTaskExecutor") TaskExecutor taskExecutor) {
         this.applicationContext = applicationContext;
         this.taskExecutor = taskExecutor;
     }
@@ -27,7 +31,7 @@ class EhouseThreads {
     @PostConstruct
     public void startThreads() {
         taskExecutor.execute(applicationContext.getBean(SocketConnection.class));
-        taskExecutor.execute(applicationContext.getBean(MessageReader.class));
+        taskExecutor.execute(applicationContext.getBean(MessageDecoder.class));
         taskExecutor.execute(applicationContext.getBean(MessageSender.class));
     }
 

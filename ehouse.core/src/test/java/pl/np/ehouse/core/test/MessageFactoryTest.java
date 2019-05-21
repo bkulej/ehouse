@@ -18,7 +18,7 @@ class MessageFactoryTest {
         try {
             List<Integer> data = "012345678912".chars().boxed().collect(Collectors.toList());
             data.add(0, 0x01);
-            Message message = MessageFactory.toMessage(data);
+            Message message = MessageFactory.fromList(data);
             Assertions.assertEquals(0x01234567L, message.getSerial(), "Bad serial");
             Assertions.assertEquals(0x89, message.getId(), "Bad id");
             Assertions.assertEquals(0x12, message.getCommand(), "Bad command");
@@ -34,7 +34,7 @@ class MessageFactoryTest {
             List<Integer> data = "012345678912112233".chars().boxed()
                     .collect(Collectors.toList());
             data.add(0, 0x01);
-            Message message = MessageFactory.toMessage(data);
+            Message message = MessageFactory.fromList(data);
             Assertions.assertEquals(0x01234567L, message.getSerial(), "Bad serial");
             Assertions.assertEquals(0x89, message.getId(), "Bad id");
             Assertions.assertEquals(0x12, message.getCommand(), "Bad command");
@@ -49,7 +49,7 @@ class MessageFactoryTest {
         try {
             List<Integer> data = "012345678912".chars().boxed().collect(Collectors.toList());
             data.add(0, 0x02);
-            Message message = MessageFactory.toMessage(data);
+            Message message = MessageFactory.fromList(data);
             Assertions.assertEquals(0x0123, message.getAdd(), "Bad add");
             Assertions.assertEquals(0x4567, message.getAsd(), "Bad asd");
             Assertions.assertEquals(0x89, message.getId(), "Bad id");
@@ -66,7 +66,7 @@ class MessageFactoryTest {
             List<Integer> data = "012345678912112233".chars().boxed()
                     .collect(Collectors.toList());
             data.add(0, 0x02);
-            Message message = MessageFactory.toMessage(data);
+            Message message = MessageFactory.fromList(data);
             Assertions.assertEquals(0x0123, message.getAdd(), "Bad add");
             Assertions.assertEquals(0x4567, message.getAsd(), "Bad asd");
             Assertions.assertEquals(0x89, message.getId(), "Bad id");
@@ -82,7 +82,7 @@ class MessageFactoryTest {
         try {
             List<Integer> data = "012345678912".chars().boxed().collect(Collectors.toList());
             data.add(0, 0x01);
-            Message message = MessageFactory.toMessage(data);
+            Message message = MessageFactory.fromList(data);
             List<Integer> result = MessageFactory.toList(message);
             Assertions.assertIterableEquals(data, result);
         } catch (Exception e) {
@@ -96,7 +96,7 @@ class MessageFactoryTest {
             List<Integer> data = "012345678912112233".chars().boxed()
                     .collect(Collectors.toList());
             data.add(0, 0x01);
-            Message message = MessageFactory.toMessage(data);
+            Message message = MessageFactory.fromList(data);
             List<Integer> result = MessageFactory.toList(message);
             Assertions.assertIterableEquals(data, result);
         } catch (Exception e) {
@@ -109,7 +109,7 @@ class MessageFactoryTest {
         try {
             List<Integer> data = "012345678912".chars().boxed().collect(Collectors.toList());
             data.add(0, 0x02);
-            Message message = MessageFactory.toMessage(data);
+            Message message = MessageFactory.fromList(data);
             List<Integer> result = MessageFactory.toList(message);
             Assertions.assertIterableEquals(data, result);
         } catch (Exception e) {
@@ -123,7 +123,7 @@ class MessageFactoryTest {
             List<Integer> data = "012345678912112233".chars().boxed()
                     .collect(Collectors.toList());
             data.add(0, 0x02);
-            Message message = MessageFactory.toMessage(data);
+            Message message = MessageFactory.fromList(data);
             List<Integer> result = MessageFactory.toList(message);
             Assertions.assertIterableEquals(data, result);
         } catch (Exception e) {

@@ -2,8 +2,8 @@
   "properties": [
     {
       "name": "core.connection.socket.port",
-      "type": "java.lang.String",
-      "description": "Description for core.connection.socket.port."
+      "type": "java.lang.Integer",
+      "description": "Socket number on the host"
     },
     {
       "name": "core.connection.socket.host",
@@ -12,13 +12,13 @@
     },
     {
       "name": "code.sender.repeat.count",
-      "type": "java.lang.String",
-      "description": "Description for code.sender.repeat.count."
+      "type": "java.lang.Integer",
+      "description": "How many times to repeat a message"
     },
     {
-      "name": "code.sender.repeat.sleep",
-      "type": "java.lang.String",
-      "description": "Description for code.sender.repeat.sleep."
+      "name": "code.sender.repeat.interval",
+      "type": "java.lang.Integer",
+      "description": "Interval between message repetitions"
     }
   ]
 }

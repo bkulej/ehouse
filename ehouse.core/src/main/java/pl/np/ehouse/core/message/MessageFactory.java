@@ -17,7 +17,7 @@ public class MessageFactory {
      * @throws MessageException     -
      * @throws DataConvertException -
      */
-    public static Message toMessage(List<Integer> data) throws MessageException, DataConvertException {
+    public static Message fromList(List<Integer> data) throws MessageException, DataConvertException {
         MessageImpl message = new MessageImpl(data.get(0));
         if (message.isAddress()) {
             message.setAdd(DataConverter.getWordFromHexAsciiList(data, 1));

@@ -1,25 +1,28 @@
-package pl.np.ehouse.core;
+package pl.np.ehouse.core.message;
+
+import java.io.IOException;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
+
+import javax.annotation.PreDestroy;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pl.np.ehouse.core.connection.Connection;
-import pl.np.ehouse.core.message.Message;
-import pl.np.ehouse.core.message.MessageFactory;
 
-import javax.annotation.PreDestroy;
-import java.util.concurrent.LinkedBlockingQueue;
+import pl.np.ehouse.core.connection.Connection;
+import pl.np.ehouse.core.utils.DataConvertException;
 
 /**
  * @author Bartek
  */
 @Service
-class MessageSender implements Runnable {
+public class MessageSender implements Runnable {
 
     private final Logger log = LoggerFactory.getLogger(MessageSender.class);
     private final Connection connection;
-    private final LinkedBlockingQueue<Message> outputQueue;
+    private final BlockingQueue<Message> outputQueue;
 
     private volatile boolean started = true;
 
@@ -39,13 +42,21 @@ class MessageSender implements Runnable {
         outputQueue.add(message);
     }
 
+    /**
+     * @param message
+     */
+    public void receivedResponse(Message message) {
+       
+        
+    }
+
     @Override
     public void run() {
         try {
             log.info("Start service {}", this.getClass());
             while (started) {
                 Message message = outputQueue.take();
-                connection.send(MessageFactory.toList(message));
+                send(message);
             }
         } catch (Exception e) {
             log.error("Error ", e);
@@ -60,6 +71,13 @@ class MessageSender implements Runnable {
     @PreDestroy
     public void finish() {
         started = false;
+    }
+
+    /*
+     * 
+     */
+    private void send(Message message) throws IOException, DataConvertException, MessageException {
+        connection.send(MessageFactory.toList(message));
     }
 
 }
