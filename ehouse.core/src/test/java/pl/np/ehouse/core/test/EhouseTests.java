@@ -1,4 +1,4 @@
-package pl.np.ehouse.core;
+package pl.np.ehouse.core.test;
 
 import org.junit.platform.runner.JUnitPlatform;
 import org.junit.platform.suite.api.SelectPackages;

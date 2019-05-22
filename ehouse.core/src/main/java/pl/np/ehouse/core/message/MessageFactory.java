@@ -3,9 +3,6 @@ package pl.np.ehouse.core.message;
 import java.util.ArrayList;
 import java.util.List;
 
-import pl.np.ehouse.core.message.utils.DataConvertException;
-import pl.np.ehouse.core.message.utils.DataConverter;
-
 /**
  * @author Bartek
  */

@@ -1,4 +1,4 @@
-package pl.np.ehouse.core.connection;
+package pl.np.ehouse.core.databus;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,7 +20,7 @@ import java.util.concurrent.LinkedBlockingQueue;
  * @author Bartek
  */
 @Service
-public class SocketConnection implements Connection, Runnable {
+public class SocketConnection implements DatabusConnection, Runnable {
 
     private final Logger log = LoggerFactory.getLogger(SocketConnection.class);
     private final BlockingQueue<List<Integer>> inputQueue = new LinkedBlockingQueue<>();

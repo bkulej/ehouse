@@ -11,8 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import pl.np.ehouse.core.connection.Connection;
-import pl.np.ehouse.core.message.utils.DataConvertException;
+import pl.np.ehouse.core.databus.DatabusConnection;
 
 /**
  * @author Bartek
@@ -21,7 +20,7 @@ import pl.np.ehouse.core.message.utils.DataConvertException;
 public class MessageSender implements Runnable {
 
     private final Logger log = LoggerFactory.getLogger(MessageSender.class);
-    private final Connection connection;
+    private final DatabusConnection connection;
     private final BlockingQueue<Message> outputQueue;
 
     private volatile boolean started = true;
@@ -30,7 +29,7 @@ public class MessageSender implements Runnable {
      * @param connection -
      */
     @Autowired
-    public MessageSender(Connection connection) {
+    public MessageSender(DatabusConnection connection) {
         this.connection = connection;
         this.outputQueue = new LinkedBlockingQueue<>();
     }

@@ -1,4 +1,4 @@
-package pl.np.ehouse.core.connection;
+package pl.np.ehouse.core.databus;
 
 import java.io.IOException;
 import java.util.List;
@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * @author Bartek
  */
-public interface Connection {
+public interface DatabusConnection {
 
     /**
      * @param message -

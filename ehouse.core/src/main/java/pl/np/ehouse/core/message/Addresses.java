@@ -1,4 +1,4 @@
-package pl.np.ehouse.core.message.utils;
+package pl.np.ehouse.core.message;
 
 /**
  * 

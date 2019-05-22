@@ -8,8 +8,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.core.task.TaskExecutor;
 import org.springframework.stereotype.Service;
 
-import pl.np.ehouse.core.connection.SocketConnection;
-import pl.np.ehouse.core.message.MessageDecoder;
+import pl.np.ehouse.core.databus.SocketConnection;
+import pl.np.ehouse.core.decoder.ResponseDecoder;
 import pl.np.ehouse.core.message.MessageSender;
 
 /**
@@ -31,7 +31,7 @@ class ThreadsRunner {
     @PostConstruct
     public void startThreads() {
         taskExecutor.execute(applicationContext.getBean(SocketConnection.class));
-        taskExecutor.execute(applicationContext.getBean(MessageDecoder.class));
+        taskExecutor.execute(applicationContext.getBean(ResponseDecoder.class));
         taskExecutor.execute(applicationContext.getBean(MessageSender.class));
     }
 

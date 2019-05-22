@@ -3,8 +3,8 @@ package pl.np.ehouse.core.test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import pl.np.ehouse.core.message.utils.DataConvertException;
-import pl.np.ehouse.core.message.utils.DataConverter;
+import pl.np.ehouse.core.message.DataConvertException;
+import pl.np.ehouse.core.message.DataConverter;
 
 import java.util.ArrayList;
 import java.util.List;
