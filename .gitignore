@@ -31,3 +31,8 @@ hs_err_pid*
 **/.project
 target
 /.idea
+/ehouse.avr/.vs
+/ehouse.avr/Debug
+/ehouse.avr/S 0*
+/ehouse.avr/*.xml
+

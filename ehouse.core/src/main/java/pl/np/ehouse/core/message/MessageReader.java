@@ -35,7 +35,7 @@ public class MessageReader implements Runnable {
 		try {
 			log.info("Start service {}", this.getClass());
 			while (started) {
-				Message message = MessageFactory.fromList(connection.read());
+				var message = MessageFactory.fromList(connection.read());
 				removeMessageFromSender(message);
 			}
 		} catch (Exception e) {

@@ -106,7 +106,7 @@ public class SocketConnection implements DatabusConnection, Runnable {
     private void putMessageToQueue(Object object) throws InterruptedException {
         if (object instanceof List) {
             @SuppressWarnings("unchecked")
-            List<Integer> message = (List<Integer>) object;
+            var message = (List<Integer>) object;
             inputQueue.put(message);
         }
     }

@@ -15,7 +15,7 @@ public class MessageFactory {
      * @throws DataConvertException -
      */
     public static Message fromList(List<Integer> data) throws MessageException, DataConvertException {
-        MessageImpl message = new MessageImpl(data.get(0));
+        var message = new MessageImpl(data.get(0));
         if (message.isAddress()) {
             message.setAdd(DataConverter.getWordFromHexAsciiList(data, 1));
             message.setAsd(DataConverter.getWordFromHexAsciiList(data, 5));
@@ -24,7 +24,7 @@ public class MessageFactory {
         }
         message.setId(DataConverter.getByteFromHexAsciiList(data, 9));
         message.setCommand(DataConverter.getByteFromHexAsciiList(data, 11));
-        for (int i = 13; i < data.size(); i += 2) {
+        for (var i = 13; i < data.size(); i += 2) {
             message.addData(DataConverter.getByteFromHexAsciiList(data, i));
         }
         return message;
@@ -37,7 +37,7 @@ public class MessageFactory {
      * @throws DataConvertException -
      */
     public static List<Integer> toList(Message message) throws DataConvertException, MessageException {
-        List<Integer> data = new ArrayList<>();
+        var data = new ArrayList<Integer>();
         data.add(message.getType());
         if (message.isAddress()) {
             DataConverter.addWordToHexAsciiList(data, message.getAdd());
@@ -50,7 +50,7 @@ public class MessageFactory {
         if (message.getData() == null) {
             return data;
         }
-        for (Integer value : message.getData()) {
+        for (var value : message.getData()) {
             DataConverter.addByteToHexAsciiList(data, value);
         }
         return data;
