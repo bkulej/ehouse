@@ -59,7 +59,7 @@ class NetworkServer implements ApplicationRunner {
     public void close() throws IOException {
         log.info("Closing socket on port {}", port);
         started = false;
-        if (serverSocket != null && serverSocket.isClosed()) {
+        if (serverSocket != null && !serverSocket.isClosed()) {
             serverSocket.close();
         }
         log.info("Closed socket on port {}", port);
