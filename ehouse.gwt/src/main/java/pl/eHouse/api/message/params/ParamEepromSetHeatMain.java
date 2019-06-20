@@ -8,6 +8,9 @@ import pl.eHouse.api.utils.ConvertException;
 import pl.eHouse.api.utils.ParamSpliter;
 
 public class ParamEepromSetHeatMain {
+	
+	final static int BOILER_WATTER_MODE_ELECTRIC = 0;
+	final static int BOILER_WATTER_MODE_PUMP = 1;
 
 	public static List<Integer> prepare(int device, ParamSpliter params)
 			throws ConvertException {
@@ -32,7 +35,7 @@ public class ParamEepromSetHeatMain {
 		params.add(floorAddress.getInt() & 0xFF);
 		params.add(boilerAddress.getInt() >> 8);
 		params.add(boilerAddress.getInt() & 0xFF);
-		params.add(0x00);
+		params.add(BOILER_WATTER_MODE_PUMP);
 		params.add(0x00);
 		params.add(0x00);
 		params.add(0x00);
