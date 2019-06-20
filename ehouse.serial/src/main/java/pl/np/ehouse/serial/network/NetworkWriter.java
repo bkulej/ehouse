@@ -17,45 +17,52 @@ import java.util.concurrent.ConcurrentHashMap;
 @Service
 public class NetworkWriter {
 
-    private final Logger log = LoggerFactory.getLogger(NetworkWriter.class);
-    private final Map<String, ObjectOutputStream> socketStreams;
+	private final Logger log = LoggerFactory.getLogger(NetworkWriter.class);
+	private final Map<String, ObjectOutputStream> socketStreams;
 
-    /**
-     *
-     */
-    public NetworkWriter() {
-        socketStreams = new ConcurrentHashMap<>();
-    }
+	/**
+	 *
+	 */
+	public NetworkWriter() {
+		socketStreams = new ConcurrentHashMap<>();
+	}
 
-    /**
-     * @param socket       -
-     * @param outputStream -
-     */
-    public void addSocket(Socket socket, ObjectOutputStream outputStream) {
-        log.info("Add connection {}", socket);
-        socketStreams.put(socket.toString(), outputStream);
-    }
+	/**
+	 * @param socket       -
+	 * @param outputStream -
+	 */
+	public void addSocket(Socket socket, ObjectOutputStream outputStream) {
+		log.info("Add connection {}", socket);
+		socketStreams.put(socket.toString(), outputStream);
+	}
 
-    /**
-     * @param socket -
-     */
-    public void removeSocket(Socket socket) {
-        log.info("Remove connection {}", socket);
-        socketStreams.remove(socket.toString());
-    }
+	/**
+	 * @param socket -
+	 */
+	public void removeSocket(Socket socket) {
+		log.info("Remove connection {}", socket);
+		socketStreams.remove(socket.toString());
+	}
 
-    /**
-     * @param message -
-     */
-    public void write(List<Integer> message) {
-        socketStreams.forEach((key, outputStream) -> {
-            try {
-                outputStream.writeObject(message);
-                outputStream.flush();
-            } catch (IOException e) {
-                log.error("Exception durring writing to output stream", e);
-            }
-        });
-    }
+	/**
+	 * @param message -
+	 */
+	public void write(List<Integer> message) {
+		socketStreams.forEach((key, outputStream) -> write(outputStream, message));
+	}
+
+	/**
+	 * 
+	 * @param outputStream -
+	 * @param message      -
+	 */
+	public void write(ObjectOutputStream outputStream, List<Integer> message) {
+		try {
+			outputStream.writeObject(message);
+			outputStream.flush();
+		} catch (IOException e) {
+			log.error("Exception durring writing to output stream", e);
+		}
+	}
 
 }

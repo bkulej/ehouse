@@ -39,12 +39,12 @@ class NetworkReader {
      */
     @Async
     public void start(Socket socket) throws IOException, ClassNotFoundException {
-        try (ObjectInputStream input = new ObjectInputStream(socket.getInputStream());
-             ObjectOutputStream outputStream = new ObjectOutputStream(socket.getOutputStream())) {
+        try (var inputStream = new ObjectInputStream(socket.getInputStream());
+             var outputStream = new ObjectOutputStream(socket.getOutputStream())) {
             log.info("Accepted connection {}", socket);
             networkWriter.addSocket(socket, outputStream);
             while (started) {
-                writeToSerial(input.readObject());
+                writeToSerial(inputStream.readObject());
             }
         } catch (IOException e) {
             log.info("Closing connection bye exception{}", socket);
@@ -71,7 +71,7 @@ class NetworkReader {
     private void writeToSerial(Object object) {
         if (object instanceof List) {
             @SuppressWarnings("unchecked")
-            List<Integer> list = (List<Integer>) object;
+            var list = (List<Integer>) object;
             serialWriter.write(list);
         }
     }
