@@ -54,8 +54,7 @@ public class MessageSender implements Runnable {
         try {
             log.info("Start service {}", this.getClass());
             while (started) {
-                var message = outputQueue.take();
-                send(message);
+                send(outputQueue.take());
             }
         } catch (Exception e) {
             log.error("Error ", e);
