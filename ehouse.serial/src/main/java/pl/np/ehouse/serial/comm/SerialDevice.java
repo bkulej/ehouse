@@ -1,18 +1,19 @@
 package pl.np.ehouse.serial.comm;
 
-import gnu.io.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
-
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.TooManyListenersException;
+
+import javax.annotation.PreDestroy;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import gnu.io.SerialPort;
+import gnu.io.SerialPortEventListener;
 
 /**
  * @author Bartek
@@ -21,34 +22,12 @@ import java.util.TooManyListenersException;
 public class SerialDevice {
 
 	private final Logger log = LoggerFactory.getLogger(SerialDevice.class);
-	private final String port;
 
-	private SerialPort serialPort;
-	private InputStream inputStream;
-	private OutputStream outputStream;
+	private final SerialPort serialPort;
 
 	@Autowired
-	SerialDevice(@Value("${serial.comm.port}") String port) {
-		this.port = port;
-	}
-
-	/**
-	 * @throws PortInUseException                -
-	 * @throws NoSuchPortException               -
-	 * @throws UnsupportedCommOperationException -
-	 * @throws IOException                       -
-	 */
-	@PostConstruct
-	public void open() throws PortInUseException, NoSuchPortException, UnsupportedCommOperationException, IOException {
-		log.info("Opening serial on port {}", port);
-		serialPort = (SerialPort) CommPortIdentifier.getPortIdentifier(port).open(this.getClass().getName(), 2000);
-		serialPort.setSerialPortParams(SerialConst.BOUND, SerialConst.DATA_BITS, SerialConst.STOP_BITS,
-				SerialConst.PARITY_EVEN);
-		serialPort.notifyOnDataAvailable(true);
-		serialPort.setOutputBufferSize(0);
-		serialPort.setRTS(true);
-		inputStream = serialPort.getInputStream();
-		outputStream = serialPort.getOutputStream();
+	SerialDevice(SerialPort serialPort) {
+		this.serialPort = serialPort;
 	}
 
 	/**
@@ -56,18 +35,14 @@ public class SerialDevice {
 	 */
 	@PreDestroy
 	public void close() throws IOException {
-		log.info("Closing serial on port {}", port);
-		if (inputStream != null) {
-			inputStream.close();
-		}
-		if (outputStream != null) {
-			outputStream.flush();
-			outputStream.close();
-		}
+		log.info("Closing serial on port {}", serialPort.getName());
 		if (serialPort != null) {
+			serialPort.getInputStream().close();
+			serialPort.getOutputStream().flush();
+			serialPort.getOutputStream().close();
 			serialPort.close();
 		}
-		log.info("Closed serial on port {}", port);
+		log.info("Closed serial on port {}", serialPort.getName());
 	}
 
 	/**
@@ -76,17 +51,17 @@ public class SerialDevice {
 	void startSend() throws IOException {
 		log.debug("Start sending message");
 		serialPort.setRTS(false);
-		outputStream.write(0);
-		outputStream.flush();
+		serialPort.getOutputStream().write(0);
+		serialPort.getOutputStream().flush();
 	}
 
 	/**
-	 * @throws IOException -
+	 * 
 	 */
 	public void stopSend() {
 		try {
-			outputStream.write(0);
-			outputStream.flush();
+			serialPort.getOutputStream().write(0);
+			serialPort.getOutputStream().flush();
 			serialPort.setRTS(true);
 		} catch (IOException e) {
 			log.error("Error during serial device stoping", e);
@@ -96,16 +71,18 @@ public class SerialDevice {
 
 	/**
 	 * @return -
+	 * @throws IOException
 	 */
-	public InputStream getInputStream() {
-		return inputStream;
+	public InputStream getInputStream() throws IOException {
+		return serialPort.getInputStream();
 	}
 
 	/**
 	 * @return -
+	 * @throws IOException
 	 */
-	public OutputStream getOutputStream() {
-		return outputStream;
+	public OutputStream getOutputStream() throws IOException {
+		return serialPort.getOutputStream();
 	}
 
 	/**

@@ -28,8 +28,8 @@ class NetworkServer implements ApplicationRunner {
 
     @Autowired
     public NetworkServer(@Value("${serial.network.port}") Integer port, NetworkReader networkReader) {
-        this.networkReader = networkReader;
         this.port = port;
+        this.networkReader = networkReader;
     }
 
     /**

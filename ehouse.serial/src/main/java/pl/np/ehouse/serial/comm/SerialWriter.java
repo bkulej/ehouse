@@ -1,6 +1,7 @@
 package pl.np.ehouse.serial.comm;
 
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,8 +30,8 @@ public class SerialWriter {
 	public synchronized void write(List<Integer> message) {
 		try {
 			serialDevice.startSend();
-			final var outputStream = serialDevice.getOutputStream();
-			for (var value : getMessageBytes(message)) {
+			final OutputStream outputStream = serialDevice.getOutputStream();
+			for (int value : getMessageBytes(message)) {
 				outputStream.write(value);
 			}
 			outputStream.flush();
@@ -46,10 +47,10 @@ public class SerialWriter {
 	 */
 	private List<Integer> getMessageBytes(List<Integer> messageInput) {
 		log.debug("Message to send {}", messageInput);
-		final var messageOutput = new ArrayList<Integer>();
-		var crc = 0;
-		var isHeader = true;
-		for (var value : messageInput) {
+		final List<Integer> messageOutput = new ArrayList<>();
+		int crc = 0;
+		boolean isHeader = true;
+		for (int value : messageInput) {
 			if (isHeader) {
 				value = SerialConst.HEADER | value;
 				isHeader = false;

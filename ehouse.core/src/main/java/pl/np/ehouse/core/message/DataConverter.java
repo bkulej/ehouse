@@ -70,7 +70,7 @@ public class DataConverter {
 	 *
 	 */
 	private static String integerToHexString(int data, int position) throws DataConvertException {
-		var result = new StringBuilder();
+		StringBuilder result = new StringBuilder();
 		result.append(Integer.toHexString(data).toUpperCase());
 		if (result.length() > position) {
 			throw new DataConvertException("Number too large");
