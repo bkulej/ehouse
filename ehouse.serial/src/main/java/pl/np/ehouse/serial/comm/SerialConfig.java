@@ -31,7 +31,7 @@ public class SerialConfig {
 	 * @throws NoSuchPortException
 	 * @throws UnsupportedCommOperationException
 	 */
-	@Bean
+	@Bean(destroyMethod="close")
 	SerialPort serialPort(@Value("${serial.comm.port}") String port)
 			throws PortInUseException, NoSuchPortException, UnsupportedCommOperationException {
 		log.info("Opening serial on port {}", port);

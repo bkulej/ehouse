@@ -5,8 +5,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.TooManyListenersException;
 
-import javax.annotation.PreDestroy;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,26 +31,12 @@ public class SerialDevice {
 	/**
 	 * @throws IOException -
 	 */
-	@PreDestroy
-	public void close() throws IOException {
-		log.info("Closing serial on port {}", serialPort.getName());
-		if (serialPort != null) {
-			serialPort.getInputStream().close();
-			serialPort.getOutputStream().flush();
-			serialPort.getOutputStream().close();
-			serialPort.close();
-		}
-		log.info("Closed serial on port {}", serialPort.getName());
-	}
-
-	/**
-	 * @throws IOException -
-	 */
 	void startSend() throws IOException {
 		log.debug("Start sending message");
 		serialPort.setRTS(false);
-		serialPort.getOutputStream().write(0);
-		serialPort.getOutputStream().flush();
+		OutputStream output = serialPort.getOutputStream();
+		output.write(0);
+		output.flush();
 	}
 
 	/**
@@ -60,8 +44,9 @@ public class SerialDevice {
 	 */
 	public void stopSend() {
 		try {
-			serialPort.getOutputStream().write(0);
-			serialPort.getOutputStream().flush();
+			OutputStream output = serialPort.getOutputStream();
+			output.write(0);
+			output.flush();
 			serialPort.setRTS(true);
 		} catch (IOException e) {
 			log.error("Error during serial device stoping", e);
