@@ -9,6 +9,7 @@ import org.springframework.core.task.TaskExecutor;
 import org.springframework.stereotype.Service;
 
 import pl.np.ehouse.core.databus.SocketConnection;
+import pl.np.ehouse.core.log.MessageLogger;
 import pl.np.ehouse.core.message.MessageReader;
 import pl.np.ehouse.core.message.MessageSenderImpl;
 
@@ -33,6 +34,7 @@ class ThreadsRunner {
         taskExecutor.execute(applicationContext.getBean(SocketConnection.class));
         taskExecutor.execute(applicationContext.getBean(MessageReader.class));
         taskExecutor.execute(applicationContext.getBean(MessageSenderImpl.class));
+        taskExecutor.execute(applicationContext.getBean(MessageLogger.class));
     }
 
 }

@@ -9,32 +9,32 @@ import pl.np.ehouse.core.message.Message;
  * @author bkulejewski
  *
  */
-public class MessageOutEvent extends ApplicationEvent {
+public class MessageOutEvent extends ApplicationEvent implements MessageEvent {
 
 	private static final long serialVersionUID = 1L;
 
-	private final Message messageOut;
+	private final Message message;
 
 	/**
 	 * 
 	 * @param source
-	 * @param request
+	 * @param message
 	 */
-	public MessageOutEvent(Object source, Message messageOut) {
+	public MessageOutEvent(Object source, Message message) {
 		super(source);
-		this.messageOut = messageOut;
+		this.message = message;
 	}
 
 	/**
 	 * @return the messageOut
 	 */
-	public Message getMessageOut() {
-		return messageOut;
+	public Message getMessage() {
+		return message;
 	}
 
 	@Override
 	public String toString() {
-		return "MessageOutEvent [messageOut=" + messageOut + "]";
+		return "MessageOutEvent [message=" + message + "]";
 	}
 
 }
