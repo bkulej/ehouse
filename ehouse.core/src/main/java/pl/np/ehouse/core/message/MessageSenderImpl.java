@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import pl.np.ehouse.core.databus.DatabusConnection;
+import pl.np.ehouse.core.util.DataConvertException;
 
 /**
  * @author Bartek

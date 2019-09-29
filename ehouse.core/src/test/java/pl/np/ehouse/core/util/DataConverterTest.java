@@ -1,10 +1,10 @@
-package pl.np.ehouse.core.test;
+package pl.np.ehouse.core.util;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import pl.np.ehouse.core.message.DataConvertException;
-import pl.np.ehouse.core.message.DataConverter;
+import pl.np.ehouse.core.util.DataConvertException;
+import pl.np.ehouse.core.util.DataConverter;
 
 import java.util.ArrayList;
 import java.util.List;

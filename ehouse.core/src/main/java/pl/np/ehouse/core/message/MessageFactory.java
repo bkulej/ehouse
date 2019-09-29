@@ -3,6 +3,9 @@ package pl.np.ehouse.core.message;
 import java.util.ArrayList;
 import java.util.List;
 
+import pl.np.ehouse.core.util.DataConvertException;
+import pl.np.ehouse.core.util.DataConverter;
+
 /**
  * @author Bartek
  */
@@ -15,8 +18,8 @@ public class MessageFactory {
 	 * @throws DataConvertException -
 	 */
 	public static Message fromList(List<Integer> data) throws MessageException, DataConvertException {
-		MessageImpl message = new MessageImpl(data.get(0));
-		if (message.isAddress()) {
+		Message message = new Message(data.get(0));
+		if (message.getType() == Types.ADDRESS) {
 			message.setAdd(DataConverter.getWordFromHexAsciiList(data, 1));
 			message.setAsd(DataConverter.getWordFromHexAsciiList(data, 5));
 		} else {
@@ -39,7 +42,7 @@ public class MessageFactory {
 	public static List<Integer> toList(Message message) throws DataConvertException, MessageException {
 		List<Integer> data = new ArrayList<>();
 		data.add(message.getType());
-		if (message.isAddress()) {
+		if (message.getType() == Types.ADDRESS) {
 			DataConverter.addWordToHexAsciiList(data, message.getAdd());
 			DataConverter.addWordToHexAsciiList(data, message.getAsd());
 		} else {

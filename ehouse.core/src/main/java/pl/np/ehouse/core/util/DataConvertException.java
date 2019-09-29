@@ -1,5 +1,10 @@
-package pl.np.ehouse.core.message;
+package pl.np.ehouse.core.util;
 
+/**
+ * 
+ * @author bkulejewski
+ *
+ */
 public class DataConvertException extends Exception {
 
     private static final long serialVersionUID = 1L;

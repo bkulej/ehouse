@@ -7,9 +7,4 @@ public interface MessageSender {
      */
     public void sendMessage(Message message);
 
-    /**
-     * @param message -
-     */
-    public void receivedResponse(Message message);
-
 }
